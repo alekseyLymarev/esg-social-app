@@ -5,6 +5,23 @@
     </ng-container>
   </div>
   <div class="user-profile__content">
+    <ng-container *ngIf="currentUserId !== (profile$ | async)?.id">
+      <div class="mat-title">Общие интересы</div>
+      <div class="profile-attributes">
+        <ng-container *ngFor="let attribute of (profile$ | async)?.profileLaces">
+          <mat-card class="profile-attribute">
+            <div class="mat-title profile-attribute-title">
+              {{attribute?.category}}
+            </div>
+            <div class="mat-subtitle">
+              {{attribute?.profileAttributeValue}}
+            </div>
+          </mat-card>
+        </ng-container>
+      </div>
+    </ng-container>
+
+    <div class="mat-title">Интересы пользователя</div>
     <div class="profile-attributes">
       <ng-container *ngFor="let attribute of profileAttributes$ | async">
         <mat-card class="profile-attribute">
