@@ -11,6 +11,7 @@ import {ApiModule} from './Data/api/api.module';
 import {HttpClientModule} from '@angular/common/http';
 import {appLocalStorage} from './Data/local-storage.provider';
 import {environment} from '../environments/environment';
+import {MatTabsModule} from '@angular/material/tabs';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import {environment} from '../environments/environment';
     MatToolbarModule,
     ReactiveFormsModule,
     HttpClientModule,
-    ApiModule.forRoot({rootUrl: environment.apiRoot})
+    ApiModule.forRoot({rootUrl: environment.apiRoot}),
+    MatTabsModule
   ],
   providers: [
     {

@@ -2,9 +2,13 @@ import {Component, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import {FormControl, FormGroup} from '@angular/forms';
 import {CategoryViewModel} from '../../../../../Data/api/models/category-view-model';
-import {of} from 'rxjs';
+import {of, startWith} from 'rxjs';
 import {CategoryService} from '../../../../../Data/api/services/category.service';
 import {map} from 'rxjs/operators';
+import {ProfileAttributeService} from '../../../../../Data/api/services/profile-attribute.service';
+import {appLocalStorage} from '../../../../../Data/local-storage.provider';
+import {ProfileAttributeViewModel} from '../../../../../Data/api/models/profile-attribute-view-model';
+import {DictionaryElementViewModel} from '../../../../../Data/api/models/dictionary-element-view-model';
 
 @Component({
   selector: 'app-profile-attribute-form',
@@ -17,14 +21,22 @@ export class ProfileAttributeFormComponent implements OnInit {
     attributeValue: new FormControl()
   })
   categories: CategoryViewModel[] = [];
-  displayCategory = (category: CategoryViewModel) => {
-    return this.categories.find(c => c.id === category?.id)?.name as string
+  displayCategory = (category: DictionaryElementViewModel | null | undefined) => {
+    return category?.name as string
   };
+  elements$ = this.form.get('attributeName')!.valueChanges
+    .pipe(
+      startWith(null),
+      map((categoryId: string) => categoryId ? this.categories.find(c => c.id === categoryId) : null),
+      map((category: CategoryViewModel | null | undefined) => category?.dictionaryElements || [])
+    )
 
   constructor(
     public dialogRef: MatDialogRef<ProfileAttributeFormComponent>,
     @Inject(MAT_DIALOG_DATA) public data: Record<string, unknown>,
-    private _categoryService: CategoryService
+    @Inject(appLocalStorage) private _ls: Storage,
+    private _categoryService: CategoryService,
+    private _profileAttributeService: ProfileAttributeService
   ) {
   }
 
@@ -37,7 +49,21 @@ export class ProfileAttributeFormComponent implements OnInit {
   }
 
   save() {
+    this._profileAttributeService.profileAttributePost({
+      body: {
+        profileId: this._ls.getItem('current_profile_id') as string,
+        categoryId: this.form.value.attributeName,
+        dictionaryElementId: typeof this.form.value.attributeValue !== 'string' ? this.form.value.attributeValue.id : undefined,
+        externalValue: typeof this.form.value.attributeValue === 'string' ? this.form.value.attributeValue : undefined,
+      }
+    })
+      .subscribe(() => {
+        this.dialogRef.close(true)
+      });
+  }
 
+  cancel() {
+    this.dialogRef.close();
   }
 
   createDictionaryElement() {

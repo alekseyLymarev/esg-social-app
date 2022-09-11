@@ -2,7 +2,16 @@
   <div class="page__header">
     <mat-toolbar color="primary">
       <mat-toolbar-row>
-        Социальный поиск
+        <div class="header">
+          <div>
+            Социальный поиск
+          </div>
+          <nav class="nav">
+            <ng-container *ngFor="let item of navItems">
+              <a [routerLink]="item.route" class="nav-item">{{item.title}}</a>
+            </ng-container>
+          </nav>
+        </div>
       </mat-toolbar-row>
     </mat-toolbar>
   </div>

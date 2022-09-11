@@ -10,6 +10,7 @@ import {MAT_DIALOG_DEFAULT_OPTIONS, MatDialogConfig, MatDialogModule} from '@ang
 import {MatButtonModule} from '@angular/material/button';
 import {ReactiveFormsModule} from '@angular/forms';
 import {MatSelect, MatSelectModule} from '@angular/material/select';
+import {MatTabsModule} from '@angular/material/tabs';
 
 
 @NgModule({
@@ -24,7 +25,8 @@ import {MatSelect, MatSelectModule} from '@angular/material/select';
     MatAutocompleteModule,
     MatDialogModule,
     MatButtonModule,
-    MatSelectModule
+    MatSelectModule,
+    MatTabsModule
   ],
   exports: [
     MatToolbarModule,
@@ -35,7 +37,8 @@ import {MatSelect, MatSelectModule} from '@angular/material/select';
     MatAutocompleteModule,
     MatDialogModule,
     MatButtonModule,
-    MatSelectModule
+    MatSelectModule,
+    MatTabsModule
   ],
   providers: [
     {

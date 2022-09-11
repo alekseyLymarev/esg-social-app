@@ -6,10 +6,20 @@
 
   <mat-form-field class="users-search-form__category">
     <mat-label>Категория</mat-label>
-    <input type="text" name="category" formControlName="dictionaryElementId" matInput>
-    <mat-autocomplete>
-      <mat-option></mat-option>
-    </mat-autocomplete>
+    <mat-select formControlName="dictionaryElementId">
+      <mat-option [value]="null"></mat-option>
+      <ng-container *ngFor="let category of categories$ | async">
+        <mat-optgroup [label]="category.name + ''">
+          <ng-container *ngFor="let element of category.dictionaryElements">
+            <mat-option [value]="element.id">{{element.name}}</mat-option>
+          </ng-container>
+        </mat-optgroup>
+      </ng-container>
+    </mat-select>
+<!--    <input type="text" name="category" formControlName="dictionaryElementId" matInput>-->
+<!--    <mat-autocomplete>-->
+<!--      <mat-option></mat-option>-->
+<!--    </mat-autocomplete>-->
   </mat-form-field>
 
   <mat-form-field class="users-search-form__external-value">

@@ -2,7 +2,10 @@ import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {FormControl, FormGroup} from '@angular/forms';
 import {UntilDestroy, untilDestroyed} from '@ngneat/until-destroy';
 import {IUsersSearchData} from '../../../../Core/interfaces/users-search-data.interface';
-import {debounceTime} from 'rxjs';
+import {debounceTime, shareReplay} from 'rxjs';
+import {CategoryService} from '../../../../Data/api/services/category.service';
+import {map} from 'rxjs/operators';
+import {ActivatedRoute} from '@angular/router';
 
 @UntilDestroy()
 @Component({
@@ -12,6 +15,12 @@ import {debounceTime} from 'rxjs';
 })
 export class UsersSearchFormComponent implements OnInit {
 
+  categories$ = this._categoriesList.categoryGet$Json()
+    .pipe(
+      map(x => x.categories ?? []),
+      shareReplay()
+    );
+
   form = new FormGroup({
     firstName: new FormControl(),
     dictionaryElementId: new FormControl(),
@@ -20,7 +29,10 @@ export class UsersSearchFormComponent implements OnInit {
 
   @Output() public searched = new EventEmitter<IUsersSearchData>();
 
-  constructor() {
+  constructor(
+    private _categoriesList: CategoryService,
+    private _route: ActivatedRoute
+  ) {
   }
 
   ngOnInit(): void {
@@ -31,6 +43,15 @@ export class UsersSearchFormComponent implements OnInit {
       )
       .subscribe(() => {
         this.searched.emit(this.form.value);
+      })
+
+    this._route.queryParamMap
+      .subscribe(queryParams => {
+        this.form.setValue({
+          firstName: queryParams.get('firstName') ?? null,
+          dictionaryElementId: queryParams.get('dictionaryElementId') ?? null,
+          externalValue: queryParams.get('externalValue') ?? null
+        })
       })
   }
 
