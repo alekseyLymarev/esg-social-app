@@ -1,0 +1,19 @@
+<form [formGroup]="form" class="users-search-form">
+  <mat-form-field class="users-search-form__first-name">
+    <mat-label>Имя пользователя</mat-label>
+    <input type="text" name="firstName" formControlName="firstName" matInput>
+  </mat-form-field>
+
+  <mat-form-field class="users-search-form__category">
+    <mat-label>Категория</mat-label>
+    <input type="text" name="category" formControlName="dictionaryElementId" matInput>
+    <mat-autocomplete>
+      <mat-option></mat-option>
+    </mat-autocomplete>
+  </mat-form-field>
+
+  <mat-form-field class="users-search-form__external-value">
+    <mat-label>Значение</mat-label>
+    <input type="text" name="externalValue" formControlName="externalValue" matInput>
+  </mat-form-field>
+</form>

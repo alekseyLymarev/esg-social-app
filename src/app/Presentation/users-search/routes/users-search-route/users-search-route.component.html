@@ -1,0 +1,17 @@
+<div class="users-search">
+  <div class="users-search__form">
+    <app-users-search-form
+      (searched)="search($event)"
+    ></app-users-search-form>
+  </div>
+  <div class="users-search__list">
+    <ng-container *ngFor="let profile of users$ | async">
+      <app-user-search-card
+        [user]="profile"
+      ></app-user-search-card>
+<!--      <mat-card>-->
+<!--        {{profile}}-->
+<!--      </mat-card>-->
+    </ng-container>
+  </div>
+</div>

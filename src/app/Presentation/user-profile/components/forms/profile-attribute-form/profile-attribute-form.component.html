@@ -1,0 +1,39 @@
+<div mat-dialog-title>Добавить атрибут</div>
+
+<mat-dialog-content>
+  <form class="profile-attribute-form" [formGroup]="form">
+    <mat-form-field>
+      <mat-label>Аттрибут</mat-label>
+<!--      <input-->
+<!--        type="text"-->
+<!--        matInput-->
+<!--        name="attributeName"-->
+<!--        [matAutocomplete]="auto"-->
+<!--        formControlName="attributeName"-->
+<!--      >-->
+      <mat-select>
+        <ng-container *ngFor="let category of categories">
+          <mat-option [value]="category.id">{{category.name}}</mat-option>
+        </ng-container>
+      </mat-select>
+<!--      <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete" [displayWith]="displayCategory">-->
+<!--        <ng-container *ngFor="let category of categories">-->
+<!--          <mat-option [value]="category">{{category.name}}</mat-option>-->
+<!--        </ng-container>-->
+<!--      </mat-autocomplete>-->
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Значение</mat-label>
+<!--      <input type="tex/t" matInput name="attributeValue" formControlName="at/stributeValue" [matAutocomplete]="auto">-->
+<!--      <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">-->
+<!--        <mat-option value="DATA">DATA</mat-option>-->
+<!--      </mat-autocomplete>-->
+    </mat-form-field>
+  </form>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-button>Отмена</button>
+  <button mat-raised-button color="primary">Ок</button>
+</mat-dialog-actions>

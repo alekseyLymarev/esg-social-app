@@ -1,0 +1,19 @@
+<mat-card>
+  <mat-card-content>
+    <div class="user-profile-card">
+      <div class="user-profile-card__info">
+        <div class="mat-title user-profile-card__full-name">{{profile.name}} {{profile.surname}}</div>
+
+        <div class="user-profile-card__contact contact" *ngIf="profile.email">
+          <div class="contact__label">Email:</div>
+          <div class="contact__value">{{profile.email}}</div>
+        </div>
+
+        <div class="user-profile-card__contact contact" *ngIf="profile.telegram">
+          <div class="contact__label">Телеграм:</div>
+          <div class="contact__value">{{profile.telegram}}</div>
+        </div>
+      </div>
+    </div>
+  </mat-card-content>
+</mat-card>

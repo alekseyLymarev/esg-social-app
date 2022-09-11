@@ -1,0 +1,10 @@
+.users-search-form {
+  margin-top: 16px;
+  display: flex;
+  flex-direction: row;
+  gap: 16px;
+
+  &__first-name {
+    flex: 1;
+  }
+}

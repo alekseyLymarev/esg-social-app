@@ -1,0 +1,33 @@
+.user-profile {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 16px 0;
+
+  &__side {
+  }
+
+  &__content {
+    flex: 1;
+  }
+}
+
+.profile-attributes {
+  display: flex;
+  flex-direction: row;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.profile-attribute {
+  flex: 1 0 21%;
+  box-sizing: border-box;
+
+  &_add-button {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+  }
+}

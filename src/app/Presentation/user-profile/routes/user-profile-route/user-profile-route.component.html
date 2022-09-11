@@ -1,0 +1,26 @@
+<div class="user-profile">
+  <div class="user-profile__side">
+    <ng-container *ngIf="profile$ | async as profile">
+      <app-user-profile-card [profile]="profile"></app-user-profile-card>
+    </ng-container>
+  </div>
+  <div class="user-profile__content">
+    <div class="profile-attributes">
+      <ng-container *ngFor="let attribute of profileAttributes$ | async">
+        <mat-card class="profile-attribute">
+          <div class="mat-title">{{attribute?.dictionaryElement?.name}}</div>
+          <div class="mat-subtitle">
+            {{attribute?.externalValue}}
+          </div>
+        </mat-card>
+      </ng-container>
+
+      <mat-card class="profile-attribute profile-attribute_add-button" (click)="openCreateAttributeForm()">
+        <mat-icon>add</mat-icon>
+        <div class="mat-title">
+          Добавить
+        </div>
+      </mat-card>
+    </div>
+  </div>
+</div>

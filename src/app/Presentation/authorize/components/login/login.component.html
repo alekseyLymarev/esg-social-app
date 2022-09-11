@@ -1,0 +1,17 @@
+<mat-card>
+  <form [formGroup]="form" class="login-form" (submit)="authorize()">
+    <div class="mat-title">Авторизация</div>
+
+    <mat-form-field>
+      <mat-label>Email</mat-label>
+      <input type="email" name="text" formControlName="login" matInput>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Пароль</mat-label>
+      <input type="password" name="password" formControlName="password" matInput>
+    </mat-form-field>
+
+    <button mat-raised-button color="primary">Войти</button>
+  </form>
+</mat-card>
